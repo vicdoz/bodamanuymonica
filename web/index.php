@@ -1,5 +1,6 @@
 ﻿<?php
 $trackId = "11JlOByl09xCxfx5CeSHgB";
+
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +89,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a href="#" class="navbar-brand">Boda M&M</a>
+					<!-- <a href="#" class="navbar-brand">Boda M&M</a> -->
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -96,19 +97,21 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 					</button>
 				</div>
 				<div class="collapse navbar-collapse" id="main-navbar">
-					<ul class="nav navbar-nav">
-						<li class="navbar_component"><a href="#queryTrackSection">Buscar una canción</a></li>
-						<!-- <li class="navbar_component"><a href="#trackPlayerSection">Play a track</a></li> -->
-						<li class="navbar_component"><a href="#trackListSection">Lista más votada</a></li>
-					</ul>
+
 					<div id="navbarButtonGroup" class="pull-right">
+						<ul class="nav navbar-nav">
 
-						<button id="signupButton" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+						<li class="navbar_component"><a href="#queryTrackSection">Buscar una canción</a></li>
+							<li class="navbar_component"><a href="#trackListSection">Lista más votada</a></li>
+						</ul>
+						<!-- <li class="navbar_component"><a href="#trackPlayerSection">Play a track</a></li> -->
+                             <!--   <button id="signupButton" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
 
-						<button id="loginButton" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Log In</button>
+                                <button id="loginButton" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Log In</button>
 
-						<button id="logoutButton" class="btn btn-primary">Log Out</button>
-					</div>
+                                <button id="logoutButton" class="btn btn-primary">Log Out</button>
+                          -->  </div>
+
 				</div>
 			</div>
 		</nav>
@@ -141,7 +144,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 
 		<!--Track Query Results-->
 		<section ng-show="queryTracks.length>0" id="queryResultsSection" class="jumbotron container">
-			<h3>Results:</h3>
+			<h3>Resultados:</h3>
 
 			<div id="queryResultsList">
 				<table class="table">
@@ -173,8 +176,6 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 
 		<!--Track Player-->
 		<section ng-show="playlist.length>0" id="trackPlayerSection" class="jumbotron container">
-			<h2>Escuchar The Playlist</h2>
-
 			<div id="previewPlaylistWrapper">
 				<iframe src="https://embed.spotify.com/?uri=spotify:track:<?php echo $trackId?>" width="300" height="300" frameborder="0"
 				allowtransparency="true"></iframe>
