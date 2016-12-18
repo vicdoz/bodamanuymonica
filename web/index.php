@@ -1,5 +1,5 @@
 ﻿<?php
-$trackId = "11JlOByl09xCxfx5CeSHgB";
+$trackId = "6SKwQghsR8AISlxhcwyA9R";
 
 ?>
 
@@ -22,6 +22,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 	<link rel="stylesheet" href="static/css/styles.css" />
 	<script type="text/javascript" src="static/js/main.js"></script>
+	<link rel="icon" href="http://bodamanuymonica.com/static/images/icon.png">
 </head>
 
 <body>
@@ -29,7 +30,6 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 	<div ng-app="myApp" ng-controller="mainCtrl">
 
 		<!--Sign up modal for new users-->
-
 		<div class="modal fade" id="signupModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -85,7 +85,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 
 		<section id="welcomeSection" class="jumbotron container">
 			<h1 id="welcomeTitle">Boda M&M</h1>
-			<h3 id="welcomeSubtitle">Elige tu la música...para este día tan especial</h3>
+			<h3 id="welcomeSubtitle">Elige tú la música... para este día tan especial</h3>
 		</section>
 
 		<!--Query Tracks-->
@@ -129,7 +129,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 							<td>{{track.artists[0].name}}</td>
 							<!-- <td>{{track.duration_ms}}</td> -->
 							<td>
-								<button ng-click="addTrack(track.id, track.name, track.artists[0].name, track.duration_ms, track.preview_url)" class="addButton btn btn-success">Add</button>
+								<button ng-click="addTrack(track.id, track.name, track.artists[0].name, track.duration_ms, track.preview_url)" class="addButton btn btn-success">Añadir a la lista</button>
 							</td>
 						</tr>
 					</tbody>
@@ -179,7 +179,25 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 	</div>
 
 	<footer id="mainFooter" class="jumbotron container">
+		<script language="javascript">
+			var days_ms=1000*60*60*24
+			var todayDate=new Date()
+			var days
+
+			var weeding_moth = 05
+			var weeding_day = 31
+			var weedingDate=new Date(todayDate.getFullYear(), weeding_moth, weeding_day)
+
+			if (todayDate.getMonth()==05 && todayDate.getDate()>31)
+				weedingDate.setFullYear(weedingDate.getFullYear()+1)
+			days = (-1) * Math.ceil((weedingDate.getTime()-todayDate.getTime())/(days_ms))
+		</script>
+
+		<script>
+			document.write("Quedan "+days+" días ")
+		</script>
 	</footer>
+
 </body>
 
 </html>

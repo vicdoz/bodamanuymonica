@@ -119,6 +119,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 	//Add Track To Playlist
 	$scope.addTrack = function (id, name, artist, duration, preview_url) {
 		console.log("Add " + name + " by " + artist);
+
 		$scope.playlist.$add({
 			id: id,
 			name: name,
@@ -136,7 +137,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 	
 	//Preview Track From Playlist
 	$scope.previewPlaylistTrack = function (id) {
-		var previewURL = 'https://embed.spotify.com/?uri=spotify:track:' + id;
+		var previewURL = 'https://embed.spotify.com/?uri=spotify:track:6SKwQghsR8AISlxhcwyA9R';
 
 		var iFrame = $("<iframe width='300' height='300' frameborder='0' allowtransparency='true'></iframe>");
 
