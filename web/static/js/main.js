@@ -125,7 +125,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 			artist: artist,
 			duration: duration,
 			preview_url: preview_url,
-			upvotes: 0
+			upvotes: 1
 		})
 
 			.then(function () {
