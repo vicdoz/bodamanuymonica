@@ -129,6 +129,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 		})
 
 			.then(function () {
+				alert("Gracias por añadir una canción!");
 				console.log("Added " + name + " by " + artist);
 			})
 	}
@@ -186,6 +187,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 		else {
 			alert("Accessing Upvote Ref Failed!");
 		}
+		alert("Gracias por votar");
 	}
 
 });
