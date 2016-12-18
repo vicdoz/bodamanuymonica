@@ -148,7 +148,7 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 
 		<!--Track List-->
 		<section ng-show="playlist.length>0" id="trackListSection" class="jumbotron container">
-			<h2>Playlist</h2>
+			<h2>Lista más votada</h2>
 
 			<div id="trackPlaylistWrapper">
 				<table id="trackPlaylistTable" class="table">
