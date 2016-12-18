@@ -20,7 +20,6 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
-
 	<link rel="stylesheet" href="static/css/styles.css" />
 	<script type="text/javascript" src="static/js/main.js"></script>
 </head>
@@ -55,41 +54,9 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 				</div>
 			</div>
 		</div>
-
-		<!--Log in modal for existing users
-
-		<div class="modal fade" id="loginModal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="loginModalTitle">Log In</h4>
-					</div>
-					<div class="modal-body">
-						<form name="loginForm">
-							<div class="form-group">
-								<label for="loginEmail">Email</label>
-								<input class="form-control" id="loginEmail" ng-model="email" type="email" placeholder="Give your email">
-								<p class="help-block" ng-show="loginForm.email.$error.email">Not an email!</p>
-							</div>
-							<div class="form-group">
-								<label for="loginPasword">Password</label>
-								<input class="form-control" ng-model="password" name="password" id="loginPasword" type="password" placeholder="Give your password">
-							</div>
-							<button id="loginSubmitButton" ng-click="signIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit"
-							class="btn btn-primary">Log In</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div> -->
-
-		<!--Navbar for the page-->
-
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<!-- <a href="#" class="navbar-brand">Boda M&M</a> -->
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -116,13 +83,9 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 			</div>
 		</nav>
 
-		<!--Welcome-->
 		<section id="welcomeSection" class="jumbotron container">
 			<h1 id="welcomeTitle">Boda M&M</h1>
 			<h3 id="welcomeSubtitle">Elige tu la música...para este día tan especial</h3>
-			<!--
-		<h2 id="welcomeActionTitle">get started</h2>
-		-->
 		</section>
 
 		<!--Query Tracks-->
@@ -214,12 +177,9 @@ $trackId = "11JlOByl09xCxfx5CeSHgB";
 		</section>
 		
 	</div>
-	
-<!--
-	<footer id="mainFooter" class="jumbotron container">
 
+	<footer id="mainFooter" class="jumbotron container">
 	</footer>
--->
 </body>
 
 </html>
