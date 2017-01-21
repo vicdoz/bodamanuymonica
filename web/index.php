@@ -22,6 +22,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 	<link rel="stylesheet" href="static/css/styles.css" />
 	<script type="text/javascript" src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/countdown.js"></script>
 	<link rel="icon" href="http://bodamanuymonica.com/static/images/icon.png">
 </head>
 
@@ -179,20 +180,6 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 	</div>
 
 	<footer id="mainFooter" class="jumbotron container">
-		<script language="javascript">
-			var days_ms=1000*60*60*24
-			var todayDate=new Date()
-			var days
-
-			var weeding_moth = 05
-			var weeding_day = 27
-			var weedingDate=new Date(todayDate.getFullYear(), weeding_moth, weeding_day)
-
-			if (todayDate.getMonth()==05 && todayDate.getDate()>31)
-				weedingDate.setFullYear(weedingDate.getFullYear()+1)
-			days = Math.ceil((weedingDate.getTime()-todayDate.getTime())/(days_ms))
-		</script>
-
 		<script>
 			document.write("Quedan "+days+" días ")
 		</script>
