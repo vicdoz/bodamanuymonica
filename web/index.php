@@ -22,6 +22,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 	<link rel="stylesheet" href="static/css/styles.css" />
 	<script type="text/javascript" src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/countdown.js"></script>
 	<link rel="icon" href="http://bodamanuymonica.com/static/images/icon.png">
 </head>
 
@@ -69,7 +70,8 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 						<ul class="nav navbar-nav">
 
 						<li class="navbar_component"><a href="#queryTrackSection">Buscar una canción</a></li>
-							<li class="navbar_component"><a href="#trackListSection">Lista más votada</a></li>
+						<li class="navbar_component"><a href="#trackListSection">Lista más votada</a></li>
+						<li class="navbar_component"><a href="#location">¿Dónde es la boda?</a></li>
 						</ul>
 						<!-- <li class="navbar_component"><a href="#trackPlayerSection">Play a track</a></li> -->
                              <!--   <button id="signupButton" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
@@ -154,7 +156,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 				<table id="trackPlaylistTable" class="table">
 					<thead>
 						<tr>
-							<th>Escuchar</th>
+						<!--	<th>Escuchar</th> -->
 							<th>Título</th>
 							<th>Artista</th>
 							<!-- <th>Duration (ms)</th> -->
@@ -164,7 +166,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 					</thead>
 					<tbody ng-repeat="track in playlist | orderBy : '-upvotes'">
 						<tr class="playlistTrackRow" id="{{track.$id}}" ">
-							<td title="{{track.name}} "><button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td>
+						<!--<td title="{{track.name}} "><button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td>-->
 							<td>{{track.name}}</td>
 							<td>{{track.artist}}</td>
 						<!--	<td>{{track.duration}}</td> -->
@@ -175,27 +177,27 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 				</table>
 			</div>
 		</section>
-		
+
 	</div>
 
 	<footer id="mainFooter" class="jumbotron container">
-		<script language="javascript">
-			var days_ms=1000*60*60*24
-			var todayDate=new Date()
-			var days
+		<section>
+			<div id="location">
+				<h2>Os esperamos aquí</h2>
+				<h3>Alquería Kukala -  La Cartuja<br>
+						</h3>
+				<p>Avinguda de la Mar, S/N, 46139
+					<br>Puebla de Farnals, València</p>
 
-			var weeding_moth = 05
-			var weeding_day = 27
-			var weedingDate=new Date(todayDate.getFullYear(), weeding_moth, weeding_day)
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.5463702975503!2d-0.30265888462965324!3d39.56983497947252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6040aab9333ea7%3A0xadc3afefccb9b63c!2sAlquer%C3%ADa+Kukala+-+Grupo+Alta+Restauraci%C3%B3n+La+Cartuja!5e0!3m2!1ses!2ses!4v1485028824607" width="300" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+		</section>
+		<section>
+			<script>
+				document.write("Quedan "+days+" días ")
+			</script>
+		</section>
 
-			if (todayDate.getMonth()==05 && todayDate.getDate()>31)
-				weedingDate.setFullYear(weedingDate.getFullYear()+1)
-			days = Math.ceil((weedingDate.getTime()-todayDate.getTime())/(days_ms))
-		</script>
-
-		<script>
-			document.write("Quedan "+days+" días ")
-		</script>
 	</footer>
 
 </body>
