@@ -185,12 +185,12 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 			var days
 
 			var weeding_moth = 05
-			var weeding_day = 31
+			var weeding_day = 27
 			var weedingDate=new Date(todayDate.getFullYear(), weeding_moth, weeding_day)
 
 			if (todayDate.getMonth()==05 && todayDate.getDate()>31)
 				weedingDate.setFullYear(weedingDate.getFullYear()+1)
-			days = (-1) * Math.ceil((weedingDate.getTime()-todayDate.getTime())/(days_ms))
+			days = Math.ceil((weedingDate.getTime()-todayDate.getTime())/(days_ms))
 		</script>
 
 		<script>

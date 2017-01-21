@@ -276,6 +276,9 @@ h3 {
 #trackPlaylistTable {
 	text-align: left;
 }
+#trackPlaylistTable .tr{
+
+}
 
 .button-fa {
 	background-color: transparent;
