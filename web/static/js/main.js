@@ -10,7 +10,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 
 	var tracksRef = ref.child('tracks');
 	var usersRef = ref.child('users');
-
+	$scope.flag = 0;
 	$scope.users = $firebaseObject(usersRef);
 	$scope.authObj = $firebaseAuth(ref);
 
@@ -163,33 +163,42 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 	}
 	
 	//Upvote A Track
-	$scope.upvote = function (id) {
+	$scope.upvote = function (id,n) {
 		var tempTrackRef = tracksRef.child(id);
 		var queryRef = tempTrackRef.child('upvotes');
+		if (n && n !== $scope.flag) {
+			$scope.flag = n;
+			if (queryRef != null) {
+				queryRef.transaction(function (upvoteNumber) {
+						alert("Gracias por votar");
+						return upvoteNumber +1
+					},
+					function (error, committed, snapshot) {
+						if (error) {
+							alert(error)
+							alert("Upvote transaction failed abnormally!");
+						}
+						else if (!committed) {
+							alert("Upvote transaction aborted!");
+						}
+						else {
+							console.log("Upvote transaction committed");
+						}
+					}
 
-		if (queryRef != null) {
-			queryRef.transaction(function (upvoteNumber) {
-				return upvoteNumber + 1;
-			},
-				function (error, committed, snapshot) {
-					if (error) {
-						alert(error)
-						alert("Upvote transaction failed abnormally!");
-					}
-					else if (!committed) {
-						alert("Upvote transaction aborted!");
-					}
-					else {
-						console.log("Upvote transaction committed");
-					}
-				}
 				);
+			}
+			else {
+				alert("Accessing Upvote Ref Failed!");
+			}
+
+
+		} else{
+			alert("No se puede volver a votar");
 		}
-		else {
-			alert("Accessing Upvote Ref Failed!");
-		}
-		alert("Gracias por votar");
+		return false;
 	}
+
 
 });
 

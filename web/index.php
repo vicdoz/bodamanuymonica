@@ -166,7 +166,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 				<table id="trackPlaylistTable" class="table">
 					<thead>
 						<tr>
-						<!--	<th>Escuchar</th> -->
+							<th>Escuchar</th>
 							<th>Título</th>
 							<th>Artista</th>
 							<!-- <th>Duration (ms)</th> -->
@@ -176,12 +176,13 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 					</thead>
 					<tbody ng-repeat="track in playlist | orderBy : '-upvotes'">
 						<tr class="playlistTrackRow" id="{{track.$id}}" ">
-						<!--<td title="{{track.name}} "><button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td>-->
+						<td title="{{track.id}} ">
+							<button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td>
 							<td>{{track.name}}</td>
 							<td>{{track.artist}}</td>
 						<!--	<td>{{track.duration}}</td> -->
 							<td class="upvotesColValue">{{track.upvotes}}</td>
-							<td><button class="button-fa" ng-click="upvote(track.$id)"><i class="fa fa-chevron-circle-up"></i></button></td>
+							<td><button class="button-fa"   ng-click="upvote(track.$id,1)"><i class="fa fa-chevron-circle-up"></i></button></td>
 						</tr>
 					</tbody>
 				</table>
