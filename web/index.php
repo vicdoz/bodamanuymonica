@@ -21,7 +21,215 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 	<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 	<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 	<link rel="stylesheet" href="static/css/styles.css" />
-	<script type="text/javascript" src="static/js/main.js"></script>
+<script>
+	var trackQueryData;
+	var currentPreview;
+
+	var baseUrl = 'https://api.spotify.com/v1/search?type=track&limit=10&market=ES&query=';
+	var myApp = angular.module('myApp', ["firebase"]);
+
+	var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseArray, $firebaseObject, $firebaseAuth) {
+
+		var ref = new Firebase('https://boda-manuymonica.firebaseio.com');
+
+		var tracksRef = ref.child('tracks');
+		var usersRef = ref.child('users');
+		$scope.flag = 0;
+		$scope.users = $firebaseObject(usersRef);
+		$scope.authObj = $firebaseAuth(ref);
+
+		$scope.authData = $scope.authObj.$getAuth();
+
+		/*
+		 $scope.authObj.$onAuth(function (authDataOriginal) {
+		 $scope.authData = authDataOriginal;
+		 });
+
+		 */
+		if ($scope.authData) {
+			$scope.userId = $scope.authData.uid;
+
+			$("#loginButton").css('display', 'none');
+			$("#logoutButton").css('display', 'inline');
+			$("#signupButton").css('display', 'none');
+		}
+		else {
+			$("#loginButton").css('display', 'inline');
+			$("#logoutButton").css('display', 'none');
+		}
+
+		$scope.playlist = $firebaseArray(tracksRef);
+
+		$scope.audioObject = {}
+		$scope.currentTrackAudio = {}
+
+		//Sign In
+		$scope.signUp = function () {
+
+			$scope.authObj.$createUser({
+					email: $scope.email,
+					password: $scope.password,
+				})
+				.then($scope.logIn)
+
+				.then(function (authData) {
+					$scope.userId = authData.uid;
+					$scope.users.$save()
+				})
+
+				.then($("#signupModal").modal('hide'))
+
+				.catch(function (error) {
+					console.error("Error: ", error);
+				});
+		}
+
+		//Sign In
+		$scope.signIn = function () {
+			$scope.logIn().then(function (authData) {
+				$scope.userId = authData.uid;
+			})
+		}
+
+		//Log In
+		$scope.logIn = function () {
+			return $scope.authObj.$authWithPassword({
+				email: $scope.email,
+				password: $scope.password
+			})
+		}
+
+		//Log Out
+		$scope.logOut = function () {
+			$scope.authObj.$unauth()
+			$scope.userId = false
+		}
+
+		//Get Tracks From Query
+		$scope.searchTracks = function () {
+			$http.get(baseUrl + $scope.track).success(function (response) {
+				trackQueryData = $scope.queryTracks = response.tracks.items
+				console.log(baseUrl + $scope.track)
+			})
+		}
+
+		//Play Track
+		$scope.preview = function (song, id) {
+			if ($scope.currentSong == song) {
+				$scope.audioObject.pause()
+
+				$("#" + id).html('<i class="fa fa-play-circle"></i>')
+
+				$scope.currentSong = false
+				return
+			}
+			else {
+				if ($scope.audioObject.pause != undefined) $scope.audioObject.pause()
+
+				if (currentPreview != id) {
+					$("#" + currentPreview).html('<i class="fa fa-play-circle"></i>')
+				}
+
+				$("#" + id).html('<i class="fa fa-stop"></i>')
+
+				currentPreview = id
+
+				$scope.audioObject = new Audio(song);
+				$scope.audioObject.play()
+				$scope.currentSong = song
+			}
+		}
+
+		//Add Track To Playlist
+		$scope.addTrack = function (id, name, artist, duration, preview_url) {
+			console.log("Add " + name + " by " + artist);
+
+			$scope.playlist.$add({
+					id: id,
+					name: name,
+					artist: artist,
+					duration: duration,
+					preview_url: preview_url,
+					upvotes: 1
+				})
+
+				.then(function () {
+					alert("Gracias por añadir una canción!");
+					console.log("Added " + name + " by " + artist);
+				})
+		}
+
+		//Preview Track From Playlist
+		$scope.previewPlaylistTrack = function (id) {
+			var previewURL = 'https://embed.spotify.com/?uri=spotify:track:6SKwQghsR8AISlxhcwyA9R';
+
+			var iFrame = $("<iframe width='300' height='300' frameborder='0' allowtransparency='true'></iframe>");
+
+			iFrame.attr('src', previewURL);
+
+			$('#previewPlaylistWrapper').html(iFrame);
+		}
+
+		//Play Track From Playlist
+		$scope.playTrack = function (id, name, artist, image_url, preview_url) {
+			if ($scope.currentTrackPlaying == song) {
+				$scope.currentTrackAudio.pause()
+
+			}
+			else {
+				if ($scope.audioObject.pause != undefined) $scope.audioObject.pause()
+				$("#" + currentPreview).html('<i class="fa fa-play-circle"></i>')
+
+				$scope.currentTrackAudio = new Audio(preview_url);
+				$scope.currentTrackAudio.play();
+				$scope.currentTrackPlaying = preview_url;
+			}
+		}
+
+		//Upvote A Track
+		$scope.upvote = function (id,n) {
+			var tempTrackRef = tracksRef.child(id);
+			var queryRef = tempTrackRef.child('upvotes');
+			if (n && n !== $scope.flag) {
+				$scope.flag = n;
+				if (queryRef != null) {
+					queryRef.transaction(function (upvoteNumber) {
+							alert("Gracias por votar");
+							return upvoteNumber +1
+						},
+						function (error, committed, snapshot) {
+							if (error) {
+								alert(error)
+								alert("Upvote transaction failed abnormally!");
+							}
+							else if (!committed) {
+								alert("Upvote transaction aborted!");
+							}
+							else {
+								console.log("Upvote transaction committed");
+							}
+						}
+
+					);
+				}
+				else {
+					alert("Accessing Upvote Ref Failed!");
+				}
+
+
+			} else{
+				alert("No se puede volver a votar");
+			}
+			return false;
+		}
+
+
+	});
+
+	$('body').tooltip({
+		selector: '[title]'
+	});
+</script>
 	<script type="text/javascript" src="static/js/countdown.js"></script>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +240,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 		ga('create', 'UA-90716120-1', 'auto');
 		ga('send', 'pageview');
 
-	</script>g
+	</script>
 	<link rel="icon" href="http://bodamanuymonica.com/static/images/icon.png">
 </head>
 
@@ -166,7 +374,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 				<table id="trackPlaylistTable" class="table">
 					<thead>
 						<tr>
-							<th>Escuchar</th>
+							<!-- <th>Escuchar</th> -->
 							<th>Título</th>
 							<th>Artista</th>
 							<!-- <th>Duration (ms)</th> -->
@@ -176,8 +384,8 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 					</thead>
 					<tbody ng-repeat="track in playlist | orderBy : '-upvotes'">
 						<tr class="playlistTrackRow" id="{{track.$id}}" ">
-						<td title="{{track.id}} ">
-							<button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td>
+						<!--<td title="{{track.id}} ">
+							<button class="previewButton" ng-click="previewPlaylistTrack(track.id)">Escuchar</button></td> -->
 							<td>{{track.name}}</td>
 							<td>{{track.artist}}</td>
 						<!--	<td>{{track.duration}}</td> -->

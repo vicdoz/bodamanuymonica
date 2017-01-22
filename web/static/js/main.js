@@ -38,7 +38,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 
 	$scope.audioObject = {}
 	$scope.currentTrackAudio = {}
-	
+
 	//Sign In
 	$scope.signUp = function () {
 
@@ -59,14 +59,14 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 				console.error("Error: ", error);
 			});
 	}
-	
+
 	//Sign In
 	$scope.signIn = function () {
 		$scope.logIn().then(function (authData) {
 			$scope.userId = authData.uid;
 		})
 	}
-	
+
 	//Log In
 	$scope.logIn = function () {
 		return $scope.authObj.$authWithPassword({
@@ -74,13 +74,13 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 			password: $scope.password
 		})
 	}
-	
+
 	//Log Out
 	$scope.logOut = function () {
 		$scope.authObj.$unauth()
 		$scope.userId = false
 	}
-	
+
 	//Get Tracks From Query
 	$scope.searchTracks = function () {
 		$http.get(baseUrl + $scope.track).success(function (response) {
@@ -88,7 +88,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 			console.log(baseUrl + $scope.track)
 		})
 	}
-	
+
 	//Play Track
 	$scope.preview = function (song, id) {
 		if ($scope.currentSong == song) {
@@ -115,7 +115,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 			$scope.currentSong = song
 		}
 	}
-	
+
 	//Add Track To Playlist
 	$scope.addTrack = function (id, name, artist, duration, preview_url) {
 		console.log("Add " + name + " by " + artist);
@@ -134,7 +134,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 				console.log("Added " + name + " by " + artist);
 			})
 	}
-	
+
 	//Preview Track From Playlist
 	$scope.previewPlaylistTrack = function (id) {
 		var previewURL = 'https://embed.spotify.com/?uri=spotify:track:6SKwQghsR8AISlxhcwyA9R';
@@ -145,7 +145,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 
 		$('#previewPlaylistWrapper').html(iFrame);
 	}
-	
+
 	//Play Track From Playlist
 	$scope.playTrack = function (id, name, artist, image_url, preview_url) {
 		if ($scope.currentTrackPlaying == song) {
@@ -161,7 +161,7 @@ var mainCtrl = myApp.controller('mainCtrl', function ($scope, $http, $firebaseAr
 			$scope.currentTrackPlaying = preview_url;
 		}
 	}
-	
+
 	//Upvote A Track
 	$scope.upvote = function (id,n) {
 		var tempTrackRef = tracksRef.child(id);
