@@ -23,6 +23,16 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 	<link rel="stylesheet" href="static/css/styles.css" />
 	<script type="text/javascript" src="static/js/main.js"></script>
 	<script type="text/javascript" src="static/js/countdown.js"></script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-90716120-1', 'auto');
+		ga('send', 'pageview');
+
+	</script>g
 	<link rel="icon" href="http://bodamanuymonica.com/static/images/icon.png">
 </head>
 
@@ -191,7 +201,7 @@ $trackId = "6SKwQghsR8AISlxhcwyA9R";
 
 				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.5463702975503!2d-0.30265888462965324!3d39.56983497947252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6040aab9333ea7%3A0xadc3afefccb9b63c!2sAlquer%C3%ADa+Kukala+-+Grupo+Alta+Restauraci%C3%B3n+La+Cartuja!5e0!3m2!1ses!2ses!4v1485028824607" width="300" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
 				</div>
-		</section>
+
 		<section>
 			<script>
 				document.write("Quedan "+days+" días ")
